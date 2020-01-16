@@ -2,6 +2,7 @@ package RestartJava;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.TextAlignment;
@@ -18,7 +19,15 @@ public class myCanvas {
     }
     public int getXCanvasSize() {return xCanvasSize;}
     public int getYCanvasSize() {return yCanvasSize;}
-    public void clearCanvas() {	gc.clearRect(0,  0,  xCanvasSize,  yCanvasSize);}		// clear canvas#
+    public void clearCanvas() {	
+    	//gc.clearRect(0,  0,  xCanvasSize,  yCanvasSize);}		// clear canvas#
+    	gc.setFill(Color.BLACK);
+		gc.fillRect(0,  0,  xCanvasSize,  yCanvasSize);}		// clear canvas#
+    public void drawIt (Image i, double x, double y, double sz) {
+		// to draw centred at x,y, give top left position and x,y size
+		// sizes/position in range 0..1, so scale to canvassize 
+	gc.drawImage(i, xCanvasSize * (x - sz/2), yCanvasSize*(y - sz/2), xCanvasSize*sz, yCanvasSize*sz);
+}
     
     Color colFromChar (char c){
 		Color ans = Color.BLACK;
@@ -35,6 +44,14 @@ public class myCanvas {
 					break;
 		case 'o' :	ans = Color.ORANGE;
 					break;
+		case 'B' :  ans = Color.BLACK;
+					break;
+		case 'T' :  ans = Color.TRANSPARENT;
+					break;
+		case 'p' :  ans = Color.PINK;
+					break;
+		case 'i'  : ans = Color.INDIGO;
+					break; 
 		}
 		return ans;
 	}

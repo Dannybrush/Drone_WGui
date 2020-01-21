@@ -1,7 +1,8 @@
 package RestartJava;
 
+import java.io.Serializable;
 
-public abstract class BaseDrone {
+public abstract class BaseDrone  implements Serializable {
 	protected double x, y, rad; 			//(XY coordinates, rad = radius (and size))
 	protected char col;						// (Character used to represent colour )
 	static int DroneCounter = 0;			//used to give each drone a unique identifying number
@@ -39,9 +40,10 @@ public abstract class BaseDrone {
 	
 	protected abstract void checkDrone(DroneColosseum b);
 	protected abstract void adjustDrone();
+	protected void setAngle(double ix, double iy){}
 	
-	public boolean hitting(double ox, double oy, double or) {
-		return (ox-x)*(ox-x) + (oy-y)*(oy-y) < (or+rad)*(or+rad);
+public boolean hitting(double ox, double oy, double or) {
+		return (ox-x)*(ox-x) + (oy-y)*(oy-y) <= (or+rad)*(or+rad);
 	}		// hitting if dist between Drone and ox,oy < ist rad + or
 	public boolean hitting (BaseDrone oDrone) {
 		return hitting(oDrone.getX(), oDrone.getY(), oDrone.getRad());

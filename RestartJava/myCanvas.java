@@ -1,17 +1,65 @@
 package RestartJava;
 
+
 import javafx.geometry.VPos;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.TextAlignment;
 
-public class myCanvas {
+public class myCanvas extends Canvas {
 	int xCanvasSize = 512;				// constants for relevant sizes
 	int yCanvasSize = 512;
     GraphicsContext gc; 
+    
+    
+    @Override
+    public double minHeight(double width)
+    {
+        return 64;
+    }
 
+    @Override
+    public double maxHeight(double width)
+    {
+        return 1000;
+    }
+
+    @Override
+    public double prefHeight(double width)
+    {
+        return minHeight(width);
+    }
+
+    @Override
+    public double minWidth(double height)
+    {
+        return 0;
+    }
+
+    @Override
+    public double maxWidth(double height)
+    {
+        return 10000;
+    }
+    @Override
+    public boolean isResizable()
+    {
+        return true;
+    }
+    @Override
+    public void resize(double width, double height)
+    {
+    	
+    	//System.out.println("killme");
+    	this.xCanvasSize = (int) width;				// constants for relevant sizes
+    	this.yCanvasSize = (int) height;
+        super.setWidth(width);
+        super.setHeight(height);
+       
+    }
     public myCanvas(GraphicsContext g, int xcs, int ycs) {
     	gc = g;
     	xCanvasSize = xcs;
@@ -22,6 +70,7 @@ public class myCanvas {
     public void clearCanvas() {	
     	//gc.clearRect(0,  0,  xCanvasSize,  yCanvasSize);}		// clear canvas#
     	gc.setFill(Color.BLACK);
+    //	System.out.println(xCanvasSize+" "+ yCanvasSize);
 		gc.fillRect(0,  0,  xCanvasSize,  yCanvasSize);}		// clear canvas#
     public void drawIt (Image i, double x, double y, double sz) {
 		// to draw centred at x,y, give top left position and x,y size

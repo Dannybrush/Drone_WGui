@@ -14,6 +14,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
  
  //FileWithFileChooser
 public class Save extends Application {
@@ -45,15 +49,66 @@ public class Save extends Application {
                 saveTextToFile(sampleText, file);
             }
         });
+        
+        Button btnSerialize = new Button("Attempt5");
+        
+        btnSerialize.setOnAction(click -> {
+            FileChooser fileChooser = new FileChooser();
  
-        VBox vBox = new VBox(sample, btnSave);
+            //Set extension filter for text files
+           FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SER File (*.ser)","*SER");
+           fileChooser.getExtensionFilters().add(extFilter);
+ 
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(primaryStage);
+ 
+            if (file != null) {
+            	System.out.println("I WANT TO DIE");
+               SaveObjectToFile(new Ex1Drone(15,15, 10, 45, 10));
+            }
+        });
+        VBox vBox = new VBox(sample, btnSave, btnSerialize);
+        
         vBox.setAlignment(Pos.CENTER);
  
         primaryStage.setScene(new Scene(vBox, 800, 300));
-        primaryStage.setTitle("www.genuinecoder.com");
+        primaryStage.setTitle("TestMyOG1SaveFunction");
         primaryStage.show();
  
     }
+ public void SaveObjectToFile(Object p ){
+	 // save the object to file
+	 
+	 String filename = "N:\\Workspace\\Part2Java\\src\\RestartJava\\TextDocs\\NewTest.ser";
+     FileOutputStream fos = null;
+     ObjectOutputStream out = null;
+     try {
+         fos = new FileOutputStream(filename);
+         out = new ObjectOutputStream(fos);
+         out.writeObject(p);
+
+         out.close();
+     } catch (Exception ex) {
+         ex.printStackTrace();
+         
+     }
+     // read the object from file
+     // save the object to file
+     FileInputStream fis = null;
+     ObjectInputStream in = null;
+     try {
+         fis = new FileInputStream(filename);
+         in = new ObjectInputStream(fis);
+         p = (Object) in.readObject();
+         in.close();
+     } catch (Exception ex) {
+         ex.printStackTrace();
+     }
+     System.out.println(p);
+ }
+     
+	 
+ 
  
     private void saveTextToFile(String content, File file) {
         try {

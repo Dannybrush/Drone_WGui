@@ -8,7 +8,13 @@ public class Ex4Drone extends Ex1Drone {
 		// TODO Auto-generated constructor stub
 		
 			}
-	protected String getStrType() {
+	public Ex4Drone(double ix, double iy, double ir){
+		this(ix, iy, ir, 45, 10);
+	}
+	public Ex4Drone(){
+		this(20.0, 20.0, 10.0, 45.0, 10.0);
+	}	
+protected String getStrType() {
 		return "StealthDrone";
 	}
 

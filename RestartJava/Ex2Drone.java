@@ -21,7 +21,12 @@ public class Ex2Drone extends BaseDrone {
 		
 		// TODO Auto-generated constructor stub
 	}
-
+/*	public Ex2Drone(double ix, double iy ){
+	new Ex2Drone(ix, iy, 10);}
+	*/
+	public Ex2Drone(){
+	this(20.0, 20.0, 10.0);
+	}
 protected void checkDrone(DroneColosseum b) {
 	if (b.checkHit(this)) score++;			// if been hit, then increase score
 }
